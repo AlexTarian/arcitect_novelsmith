@@ -1,3 +1,4 @@
+import 'package:arcitect_novelsmith/views/generator_info.dart';
 import 'package:flutter/material.dart';
 import 'package:arcitect_novelsmith/constants.dart';
 import 'package:arcitect_novelsmith/components/custom_app_bar.dart';
@@ -57,6 +58,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontFamily: 'PermanentMarker',
                     fontSize: 50.0,
                   ),
+                ),
+                SizedBox(height: 30.0),
+                GestureDetector(
+                  child: IconBoxButton(
+                    icon: Icons.lightbulb,
+                    text: 'Story Generator',
+                  ),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (context) => const GeneratorInfoScreen()));
+                  },
                 ),
                 SizedBox(height: 30.0),
                 GestureDetector(

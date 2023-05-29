@@ -30,6 +30,7 @@ class CharacterDetailScreen extends StatefulWidget {
 }
 
 class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
+  String viewType = 'Summary';
   int stre = 0;
   int dext = 0;
   int cons = 0;
@@ -112,6 +113,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                   height: MediaQuery.of(context).size.height * .70,
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width,
@@ -164,9 +166,72 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 30.0),
+                        Text(
+                          'Level of Detail',
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 10.0),
+                        Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2, color: Theme.of(context).primaryColor),
+                          ),
+                          child: DropdownButton<String>(
+                            dropdownColor: Theme.of(context).primaryColor,
+                            isExpanded: true,
+                            value: viewType,
+                            elevation: 16,
+                            style: TextStyle(
+                                fontSize: 20.0, color: Theme.of(context).primaryColorLight),
+                            underline: Container(
+                              width: double.infinity,
+                              height: 2,
+                              color: Colors.transparent,
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                viewType = newValue!;
+                              });
+                            },
+                            selectedItemBuilder: (BuildContext context) { //<-- SEE HERE
+                              return <String>['Summary', 'Detailed', 'Ultra-Detailed']
+                                  .map((String value) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      viewType,
+                                      style: TextStyle(
+                                        fontSize: 20.0, color: Theme.of(context).primaryColor),
+                                    ),
+                                  ],
+                                );
+                              }).toList();
+                            },
+                            items: [
+                              'Summary',
+                              'Detailed',
+                              'Ultra-Detailed'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        const SizedBox(height: 30.0),
                         CustomFormField(label: 'Name'),
                         const SizedBox(height: 15.0),
-                        CustomFormField(label: 'Race'),
+                        Visibility(
+                          visible: viewType != "Summary",
+                            child: CustomFormField(label: 'Race')
+                        ),
                         const SizedBox(height: 15.0),
                         CustomFormField(label: 'Age'),
                         const SizedBox(height: 15.0),
