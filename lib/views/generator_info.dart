@@ -35,6 +35,14 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
     'Thriller'
   ];
 
+  void goToPage(int page) {
+    controller.animateToPage(
+      page,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.ease,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,35 +84,51 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                   child: PageView(
                     controller: controller,
                     children: <Widget>[
-                      PageviewLayout(
-                        text: 'First, let\'s decide on a genre. Select from the first dropdown menu the option to which you gravitate towards most. If your idea blends genres, you may add a secondary genre.',
-                        // back: controller.animateToPage(controller.page.toInt() + 1, duration: Duration(milliseconds: 400), curve: Curves.easeIn),
-                        // forward: controller.animateToPage(controller.page.toInt() + 1, duration: Duration(milliseconds: 400), curve: Curves.easeIn),
-                          child: Column(
-                            children: <Widget>[
-                              CustomDropDown(
-                                label: 'Primary Genre',
-                                textController: genreOne,
-                                list: genreList,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    genreOne.text = newValue!;
-                                  });
-                                },
-                              ),
-                              const SizedBox(height: 20),
-                              CustomDropDown(
-                                label: 'Secondary Genre (Optional)',
-                                textController: genreTwo,
-                                list: genreList,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    genreTwo.text = newValue!;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
+                      PageViewLayout(
+                        text:
+                            'First, let\'s decide on a genre. Select from the first dropdown menu the option to which you gravitate towards most. If your idea blends genres, you may add a secondary genre.',
+                        back: () => goToPage(0),
+                        forward: () => goToPage(1),
+                        child: Column(
+                          children: <Widget>[
+                            CustomDropDown(
+                              label: 'Primary Genre',
+                              textController: genreOne,
+                              list: genreList,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  genreOne.text = newValue!;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            CustomDropDown(
+                              label: 'Secondary Genre (Optional)',
+                              textController: genreTwo,
+                              list: genreList,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  genreTwo.text = newValue!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      PageViewLayout(
+                        text: 'Great! What sort of theme interests you for this story? If you\'re not sure, just pick one that resonates with you.',
+                        back: () => goToPage(0),
+                        forward: () => goToPage(2),
+                        child: CustomDropDown(
+                          label: 'Theme',
+                          textController: genreOne,
+                          list: genreList,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              genreOne.text = newValue!;
+                            });
+                          },
+                        ),
                       ),
                     ],
                   ),

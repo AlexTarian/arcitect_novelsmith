@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class PageviewLayout extends StatelessWidget {
-  const PageviewLayout(
+class PageViewLayout extends StatelessWidget {
+  const PageViewLayout(
       {super.key,
         required this.text,
         required this.child,
-        this.back,
-        this.forward,
+        required this.back,
+        required this.forward,
       });
 
   final String text;
   final Widget child;
-  final void Function()? back;
-  final void Function()? forward;
+  final void Function() back;
+  final void Function() forward;
 
 
   @override
