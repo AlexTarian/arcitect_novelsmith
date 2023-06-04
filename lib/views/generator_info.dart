@@ -1,3 +1,4 @@
+import 'package:arcitect_novelsmith/components/form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:arcitect_novelsmith/constants.dart';
 import 'package:arcitect_novelsmith/components/custom_app_bar.dart';
@@ -7,6 +8,7 @@ import 'package:arcitect_novelsmith/views/character_list.dart';
 import 'package:arcitect_novelsmith/views/story_list.dart';
 import 'package:arcitect_novelsmith/components/pageview_layout.dart';
 import 'package:arcitect_novelsmith/components/custom_dropdown.dart';
+import 'package:arcitect_novelsmith/components/elements_list.dart';
 
 class GeneratorInfoScreen extends StatefulWidget {
   const GeneratorInfoScreen({Key? key}) : super(key: key);
@@ -19,21 +21,10 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
   final PageController controller = PageController(initialPage: 0);
   TextEditingController genreOne = TextEditingController(text: 'Genre');
   TextEditingController genreTwo = TextEditingController(text: 'Genre');
-  List<String> genreList = [
-    'Genre',
-    'Detective',
-    'Romance',
-    'Comedy',
-    'Horror',
-    'Action',
-    'Myth',
-    'Coming of Age',
-    'Sci-Fi',
-    'Fantasy',
-    'Crime',
-    'Western',
-    'Thriller'
-  ];
+  TextEditingController themeOne = TextEditingController(text: 'Theme');
+  TextEditingController themeTwo = TextEditingController();
+  List<String> genreList = ElementLists().genres;
+  List<String> themeList = ElementLists().themes;
 
   void goToPage(int page) {
     controller.animateToPage(
@@ -92,7 +83,7 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                         child: Column(
                           children: <Widget>[
                             CustomDropDown(
-                              label: 'Primary Genre',
+                              label: 'Genre',
                               textController: genreOne,
                               list: genreList,
                               onChanged: (String? newValue) {
@@ -103,7 +94,7 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                             ),
                             const SizedBox(height: 20),
                             CustomDropDown(
-                              label: 'Secondary Genre (Optional)',
+                              label: 'Genre',
                               textController: genreTwo,
                               list: genreList,
                               onChanged: (String? newValue) {
@@ -116,18 +107,32 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                         ),
                       ),
                       PageViewLayout(
-                        text: 'Great! What sort of theme interests you for this story? If you\'re not sure, just pick one that resonates with you.',
+                        text: 'Great! What sort of theme interests you for this story? If you\'re not sure, just pick one that resonates with you. If you have one in mind that isn\'t on the list, you can type one into the \"Custom Theme\" field below.',
                         back: () => goToPage(0),
                         forward: () => goToPage(2),
-                        child: CustomDropDown(
-                          label: 'Theme',
-                          textController: genreOne,
-                          list: genreList,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              genreOne.text = newValue!;
-                            });
-                          },
+                        child: Column(
+                          children: <Widget>[
+                            CustomDropDown(
+                              label: 'Theme',
+                              textController: themeOne,
+                              list: themeList,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  themeOne.text = newValue!;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 30),
+                            CustomFormField(
+                              label: 'Custom Theme',
+                              controller: themeTwo,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  themeOne.text = 'Theme';
+                                });
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],

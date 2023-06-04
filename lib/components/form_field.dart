@@ -32,7 +32,7 @@ class CustomFormField extends StatelessWidget {
       keyboardType: keyboard,
       onChanged: onChanged,
       textAlignVertical: TextAlignVertical.top,
-      style: const TextStyle(fontSize: 20.0),
+      style: TextStyle(fontSize: 20.0, color: Theme.of(context).primaryColor),
       decoration: InputDecoration(
         labelText: label,
         labelStyle:
