@@ -36,7 +36,7 @@ class CustomFormField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         labelStyle:
-        TextStyle(color: Theme.of(context).primaryColor, fontSize: 20.0),
+        TextStyle(color: Theme.of(context).primaryColor, fontSize: 20.0, fontWeight: FontWeight.w700),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             width: 2,

@@ -1,7 +1,23 @@
 class ElementLists {
 
-  final List<String> genres = [
-    'Genre',
+  final List<String> genreOne = [
+    'Primary Genre',
+    'Detective',
+    'Romance',
+    'Comedy',
+    'Horror',
+    'Action',
+    'Myth',
+    'Coming of Age',
+    'Sci-Fi',
+    'Fantasy',
+    'Crime',
+    'Western',
+    'Thriller',
+  ];
+
+  final List<String> genreTwo = [
+    'Secondary Genre (Optional)',
     'Detective',
     'Romance',
     'Comedy',

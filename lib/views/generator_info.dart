@@ -19,11 +19,12 @@ class GeneratorInfoScreen extends StatefulWidget {
 
 class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
   final PageController controller = PageController(initialPage: 0);
-  TextEditingController genreOne = TextEditingController(text: 'Genre');
-  TextEditingController genreTwo = TextEditingController(text: 'Genre');
+  TextEditingController genreOne = TextEditingController(text: 'Primary Genre');
+  TextEditingController genreTwo = TextEditingController(text: 'Secondary Genre (Optional)');
   TextEditingController themeOne = TextEditingController(text: 'Theme');
   TextEditingController themeTwo = TextEditingController();
-  List<String> genreList = ElementLists().genres;
+  List<String> genreListOne = ElementLists().genreOne;
+  List<String> genreListTwo = ElementLists().genreTwo;
   List<String> themeList = ElementLists().themes;
 
   void goToPage(int page) {
@@ -83,9 +84,9 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                         child: Column(
                           children: <Widget>[
                             CustomDropDown(
-                              label: 'Genre',
+                              label: 'Primary Genre',
                               textController: genreOne,
-                              list: genreList,
+                              list: genreListOne,
                               onChanged: (String? newValue) {
                                 setState(() {
                                   genreOne.text = newValue!;
@@ -94,9 +95,9 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                             ),
                             const SizedBox(height: 20),
                             CustomDropDown(
-                              label: 'Genre',
+                              label: 'Secondary Genre (Optional)',
                               textController: genreTwo,
-                              list: genreList,
+                              list: genreListTwo,
                               onChanged: (String? newValue) {
                                 setState(() {
                                   genreTwo.text = newValue!;
@@ -127,9 +128,9 @@ class _GeneratorInfoScreenState extends State<GeneratorInfoScreen> {
                               label: 'Custom Theme',
                               controller: themeTwo,
                               onChanged: (String? newValue) {
-                                setState(() {
-                                  themeOne.text = 'Theme';
-                                });
+                                // setState(() {
+                                //   themeOne.text = 'Theme';
+                                // });
                               },
                             ),
                           ],
