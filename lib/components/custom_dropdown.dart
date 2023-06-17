@@ -48,7 +48,10 @@ class CustomDropDown extends StatelessWidget {
                       Text(
                         textController.text,
                         style: TextStyle(
-                            fontSize: 20.0, color: Theme.of(context).primaryColor),
+                            fontSize: textController.text == label ? 20.0 : 20.0,
+                            fontWeight: textController.text == label ? FontWeight.bold : FontWeight.normal,
+                            color: Theme.of(context).primaryColor,
+                        ),
                       ),
                     ],
                   );
@@ -72,7 +75,7 @@ class CustomDropDown extends StatelessWidget {
               child: Text(textController.text == label ? '' : label,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 20.0,
+                  fontSize: 22.0,
                   fontWeight: FontWeight.w700,
                 ),
               ),

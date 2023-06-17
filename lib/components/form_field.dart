@@ -34,9 +34,14 @@ class CustomFormField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.top,
       style: TextStyle(fontSize: 20.0, color: Theme.of(context).primaryColor),
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).primaryColor,
+          )
+        ),
         labelText: label,
         labelStyle:
-        TextStyle(color: Theme.of(context).primaryColor, fontSize: 20.0, fontWeight: FontWeight.w700),
+        TextStyle(color: Theme.of(context).primaryColor, fontSize: controller?.text == '' ? 20.0 : 28, fontWeight: FontWeight.w700),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             width: 2,
